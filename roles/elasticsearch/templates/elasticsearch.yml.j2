@@ -1,0 +1,8 @@
+node.name: {{nodename}}
+path.data: {{baseDir}}/{{elasticsearchVersion}}/data
+path.logs: {{baseDir}}/{{elasticsearchVersion}}/logs
+network.host: {{ansible_ssh_host}}
+http.port: 29200
+transport.tcp.port: 29300
+discovery.zen.ping.unicast.hosts: ["{{nodeip1}}","{{nodeip2}}","{{nodeip3}}"]
+xpack.ml.enabled: false

@@ -1,0 +1,19 @@
+---
+  - name: delete base path
+    file: path={{baseDir}}/elasticsearch_cluster state=absent
+  - name: delete elasticsearch path
+    file: path={{baseDir}}/{{elasticsearchVersion}} state=absent
+  - name: mkdir elasticsearch cluster path
+    file: path={{baseDir}}/elasticsearch_cluster state=directory mode=0755
+  - name: mkdir elasticsearch script path
+    file: path={{baseDir}}/elasticsearch_cluster/script state=directory mode=0755
+  - name: send aotostar shell script
+    template: src={{AnsibleDir}}/roles/elasticsearch/templates/autostarSet.sh.j2 dest={{baseDir}}/elasticsearch_cluster/script/autostarSet.sh
+  - name: send shutdown script
+    template: src={{AnsibleDir}}/roles/elasticsearch/templates/shutdown.sh.j2 dest={{baseDir}}/elasticsearch_cluster/script/shutdown.sh
+  - name: send start script
+    template: src={{AnsibleDir}}/roles/elasticsearch/templates/start.sh.j2 dest={{baseDir}}/elasticsearch_cluster/script/start.sh
+  - name: chmod path
+    shell: chmod +x -R {{baseDir}}/elasticsearch_cluster/script/
+  - name: exec autostartSet
+    shell: /bin/bash {{baseDir}}/elasticsearch_cluster/script/autostarSet.sh

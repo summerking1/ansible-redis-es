@@ -1,0 +1,61 @@
+---
+  - name: install elasticsearch
+    unarchive: src={{AnsibleDir}}/files/{{elasticsearchVersion}}.tar.gz dest={{baseDir}} copy=yes
+  - name: send elasticsearch config file
+    template: src={{AnsibleDir}}/roles/elasticsearch/templates/elasticsearch.yml.j2 dest={{baseDir}}/{{elasticsearchVersion}}/config/elasticsearch.yml
+  - name: chown elasticsearch file
+    shell: chown -R smartmining:smartmining {{baseDir}}/{{elasticsearchVersion}}
+  - name: add config to limits.conf1
+    lineinfile: 
+      dest: /etc/security/limits.conf
+      line: '* soft nofile 65536'
+    ignore_errors: True
+  - name: add config to limits.conf2
+    lineinfile: 
+      dest: /etc/security/limits.conf
+      line: '* hard nofile 65536'
+    ignore_errors: True     
+  - name: add config to limits.conf3
+    lineinfile: 
+      dest: /etc/security/limits.conf
+      line: '* soft nproc 4096'
+    ignore_errors: True
+  - name: add config to limits.conf4
+    lineinfile: 
+      dest: /etc/security/limits.conf
+      line: '* hard nproc 4096'
+    ignore_errors: True
+  - name: add config to limits.conf5
+    lineinfile: 
+      dest: /etc/security/limits.conf
+      line: 'smartmining soft memlock unlimited'
+    ignore_errors: True
+  - name: add config to limits.conf6
+    lineinfile: 
+      dest: /etc/security/limits.conf
+      line: 'smartmining hard memlock unlimited'
+    ignore_errors: True
+  - name: add config to sysctl.conf1
+    lineinfile: 
+      dest: /etc/sysctl.conf
+      line: 'vm.max_map_count=655360'
+    ignore_errors: True
+  - name: add config to sysctl.conf2
+    lineinfile: 
+      dest: /etc/sysctl.conf
+      line: 'fs.file-max=655360'
+    ignore_errors: True
+  - name: take effect
+    shell: sysctl -p
+  - name: start elasticsearch install
+    shell: /bin/bash {{baseDir}}/elasticsearch_cluster/script/start.sh
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+---
+- hosts: java
+  gather_facts: no 
+  remote_user: root
+  ignore_errors: yes
+  roles:
+    - java
+  vars:
+    - baseDir: /home/smartmining
+    - AnsibleDir: /etc/ansible
+    - javaVersion: jdk-8u171-linux-x64
+    - nodeip1: 192.168.0.177 
+    - nodeip2: 192.168.0.178
+    - nodeip3: 192.168.0.179 
+

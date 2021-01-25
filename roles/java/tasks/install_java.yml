@@ -1,0 +1,18 @@
+---
+  - name: copy rpm file to servers
+    copy: src={{AnsibleDir}}/files/{{javaVersion}}.rpm  dest={{baseDir}}/soft/
+  - name: Install package jdks
+    shell: rpm -ivh {{baseDir}}/soft/{{javaVersion}}.rpm
+  - name: add config to profile
+    shell: /bin/echo {{ item }} >> /etc/profile
+    with_items:
+        - export JAVA_HOME=/usr/java/latest
+        - export PATH=/usr/java/latest/bin:$PATH
+        - export CLASSPATH=.:/usr/java/latest/lib/dt.jar:/usr/java/latest/lib/tools.jar
+  - name: take effect
+    shell: source /etc/profile
+  - name: test java version
+    shell: java -version
+
+
+

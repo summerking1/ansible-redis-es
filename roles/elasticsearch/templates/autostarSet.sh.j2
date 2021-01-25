@@ -1,0 +1,6 @@
+#!/bin/bash
+chmod +x /etc/rc.d/rc.local
+grep "elasticsearch_cluster" /etc/rc.d/rc.local
+if [[ $? -ne 0 ]];then
+echo "{{baseDir}}/elasticsearch_cluster/script/start.sh" >> /etc/rc.d/rc.local
+fi

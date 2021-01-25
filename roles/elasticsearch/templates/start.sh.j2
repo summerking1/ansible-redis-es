@@ -1,0 +1,9 @@
+#!/bin/bash
+x_user="smartmining"
+
+kill -9 "$(ps -ef|grep org.elasticsearch.bootstrap.Elasticsearch|grep -v grep|awk '{print $2}')"
+
+sleep 2
+
+su - $x_user -c "cd {{baseDir}}/{{elasticsearchVersion}}/bin/&&./elasticsearch -d"
+echo "结束启动 elasticsearch"

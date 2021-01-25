@@ -1,0 +1,7 @@
+---
+  - name: delete base path
+    file: path={{baseDir}}/soft state=absent
+  - name: mkdir base path
+    file: path={{baseDir}}/soft state=directory mode=0755
+
+ 
