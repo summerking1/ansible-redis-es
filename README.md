@@ -87,11 +87,11 @@ PLAY RECAP *********************************************************************
 - 验证
 
 ```shell
-[root@localhost smartmining]# ps -ef |grep redis
-root     121639      1  0 09:56 ?        00:00:00 /home/smartmining/redis-5.0.5/src/redis-server 192.168.0.178:27000 [cluster]
-root     121641      1  0 09:56 ?        00:00:00 /home/smartmining/redis-5.0.5/src/redis-server 192.168.0.178:27001 [cluster]
+[root@localhost summer]# ps -ef |grep redis
+root     121639      1  0 09:56 ?        00:00:00 /home/summer/redis-5.0.5/src/redis-server 192.168.0.178:27000 [cluster]
+root     121641      1  0 09:56 ?        00:00:00 /home/summer/redis-5.0.5/src/redis-server 192.168.0.178:27001 [cluster]
 root     125286   1947  0 09:58 pts/0    00:00:00 grep --color=auto redis
-[root@localhost smartmining]# redis-cli -h 192.168.0.178 -p 27000
+[root@localhost summer]# redis-cli -h 192.168.0.178 -p 27000
 192.168.0.178:27000> cluster nodes
 9f6933b649782aebe995020394d7c4fa2ae5dd74 192.168.0.178:27001@37001 slave e52490b0f7b8902e964355d5c049f963e51f9ee3 0 1611626301811 1 connected
 e52490b0f7b8902e964355d5c049f963e51f9ee3 192.168.0.177:27000@37000 master - 0 1611626303816 1 connected 0-5460
@@ -143,10 +143,10 @@ PLAY RECAP *********************************************************************
 ```
 
 1. 手动关机机命令：
-   ansible redis -m shell -a "sh /home/smartmining/redis_cluster/script/shutdown.sh"
-   ansible elasticsearch -m shell -a "sh /home/smartmining/elasticsearch_cluster/script/shutdown.sh"
+   ansible redis -m shell -a "sh /home/summer/redis_cluster/script/shutdown.sh"
+   ansible elasticsearch -m shell -a "sh /home/summer/elasticsearch_cluster/script/shutdown.sh"
 
 2. 手动开机命令：
-   ansible redis -m shell -a "sh /home/smartmining/redis_cluster/script/start.sh"
-   ansible elasticsearch -m shell -a "sh /home/smartmining/elasticsearch_cluster/script/start.sh"
+   ansible redis -m shell -a "sh /home/summer/redis_cluster/script/start.sh"
+   ansible elasticsearch -m shell -a "sh /home/summer/elasticsearch_cluster/script/start.sh"
 
